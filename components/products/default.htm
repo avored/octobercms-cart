@@ -1,0 +1,31 @@
+{% set products = __SELF__.products %}
+
+<ul class="product-list">
+    {% for product in products %}
+        <li>
+            <h3><a href="{{ product.url }}">{{ product.name }}</a></h3>
+
+            <p class="description">{{ product.description | raw }}</p>
+        </li>
+    {% else %}
+        <li class="no-data">{{ noProductsMessage }}</li>
+    {% endfor %}
+</ul>
+
+{% if products.lastPage > 1 %}
+    <ul class="pagination">
+        {% if products.currentPage > 1 %}
+            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (products.currentPage-1) }) }}">&larr; Prev</a></li>
+        {% endif %}
+
+        {% for page in 1..products.lastPage %}
+            <li class="{{ products.currentPage == page ? 'active' : null }}">
+                <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        {% if products.lastPage > products.currentPage %}
+            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (products.currentPage+1) }) }}">Next &rarr;</a></li>
+        {% endif %}
+    </ul>
+{% endif %}

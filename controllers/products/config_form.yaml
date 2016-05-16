@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Product
+
+# Model Form Field configuration
+form: $/mage2/cart/models/product/fields.yaml
+
+# Model Class name
+modelClass: Mage2\Cart\Models\Product
+
+# Default redirect location
+defaultRedirect: mage2/cart/products
+
+# Create page
+create:
+    title: Create Product
+    redirect: mage2/cart/products/update/:id
+    redirectClose: mage2/cart/products
+
+# Update page
+update:
+    title: Edit Product
+    redirect: mage2/cart/products
+    redirectClose: mage2/cart/products
+
+# Preview page
+preview:
+    title: Preview Product

@@ -1,0 +1,34 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+
+    name:
+        label: Name
+        span: left
+        placeholder: Enter Name
+        
+   
+
+    slug:
+        label: Slug
+        span: right
+        placeholder: Enter Slug
+        preset:
+            field: name
+            type: slug
+            
+    price:
+        label: Price
+        span: right
+        placeholder: Enter Price
+            
+    description:
+        label: Description
+        span: left
+        type: richeditor
+ 
+   
+
+
