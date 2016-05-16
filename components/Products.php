@@ -1,5 +1,7 @@
 <?php namespace Mage2\Cart\Components;
 
+
+use Illuminate\Support\Facades\Session;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
 use Mage2\Cart\Models\Product;
@@ -66,9 +68,29 @@ class Products extends ComponentBase
             ],
         ];
     }
-    
+
+    public function addToCart() {
+        $id = post('id');
+        $qty =  post('qty');
+
+        $product = Product::findorfail($id);
+
+        dd($product);
+        $data[$product->id] = [
+                            'id' => $product->id,
+                            'name' => $product->name,
+                            'price' => $product->price,
+                            'qty' => $qty,
+                        ];
+        Session::put('items', $data);
+
+    }
     public function onRun()
     {
+        $data = Session::get('items');
+
+        $this->page['cartItems']  = count($data);
+        //dd($data);
         $this->prepareVars();
 
         $this->products = $this->page['products'] = $this->listProducts();
