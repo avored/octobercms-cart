@@ -1,9 +1,9 @@
-{% set products = __SELF__.products %}
+{% set items = __SELF__.items %}
 <p>&nbsp;</p>
-<div class="row">
+<div class="container-fluid">
 
-    <ul class="product-list">
-        {% for product in products %}
+    <div class="row product-list">
+        {% for product in items %}
 
             <div class="col-md-3">
                 <div class="panel panel-default">
@@ -13,14 +13,17 @@
 
                     <div class="panel-body">
                         <p class="description">{{ product.description | raw }}</p>
-
-                        <form data-request="{{ __SELF__ }}::addToCart">
+           
+                        <form data-request="{{ __SELF__ }}::onTest" >
 
                             <div class="input-group">
                                 <input type="hidden" name="id" value="{{ product.id }}">
                                 <input type="number" id="input-item" class="form-control" value="1" name="qty"/>
                                 <span class="input-group-btn">
-                                    <button type="submit" class="btn btn btn-primary">AddToCart</button>
+                                    <!--<button type="submit" class="btn btn btn-primary">AddToCart</button>-->
+                                    <button type="submit" class="btn btn-sm btn-primary btn-block">
+                                    AddToCart
+                                    </button>
                                 </span>
                             </div>
 
@@ -30,24 +33,24 @@
             </div>
 
         {% else %}
-        <li class="no-data">{{ noProductsMessage }}</li>
+        <div class="no-data">{{ noProductsMessage }}</div>
         {% endfor %}
-    </ul>
+    </div>
 </div>
-{% if products.lastPage > 1 %}
+{% if items.lastPage > 1 %}
 <ul class="pagination">
-    {% if products.currentPage > 1 %}
-    <li><a href="{{ this.page.baseFileName|page({ (pageParam): (products.currentPage-1) }) }}">&larr; Prev</a></li>
+    {% if items.currentPage > 1 %}
+    <li><a href="{{ this.page.baseFileName|page({ (pageParam): (items.currentPage-1) }) }}">&larr; Prev</a></li>
     {% endif %}
 
-    {% for page in 1..products.lastPage %}
-    <li class="{{ products.currentPage == page ? 'active' : null }}">
+    {% for page in 1..items.lastPage %}
+    <li class="{{ items.currentPage == page ? 'active' : null }}">
         <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
     </li>
     {% endfor %}
 
-    {% if products.lastPage > products.currentPage %}
-    <li><a href="{{ this.page.baseFileName|page({ (pageParam): (products.currentPage+1) }) }}">Next &rarr;</a></li>
+    {% if items.lastPage > items.currentPage %}
+    <li><a href="{{ this.page.baseFileName|page({ (pageParam): (items.currentPage+1) }) }}">Next &rarr;</a></li>
     {% endif %}
 </ul>
 {% endif %}

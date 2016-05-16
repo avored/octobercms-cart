@@ -1,99 +1,107 @@
-<?php namespace Mage2\Cart\Components;
+<?php
 
+namespace Mage2\Cart\Components;
 
 use Illuminate\Support\Facades\Session;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
 use Mage2\Cart\Models\Product;
 
-class Products extends ComponentBase
-{
-    
+class Products extends ComponentBase {
+
     /**
      * A collection of products to display
      * @var Collection
      */
-    public $products;
+    public $items;
 
     /**
      * Parameter to use for the page number
      * @var string
      */
     public $pageParam;
-    
-     /**
+
+    /**
      * Reference to the page name for linking to products.
      * @var string
      */
     public $productPage;
 
-
-    public function componentDetails()
-    {
+    public function componentDetails() {
         return [
-            'name'        => 'Product List',
+            'name' => 'Product List',
             'description' => 'Display Product List'
         ];
     }
 
-    public function defineProperties()
-    {
-          return [
+    public function defineProperties() {
+        return [
             'pageNumber' => [
-                'title'       => 'Page Number',
+                'title' => 'Page Number',
                 'description' => 'This value is used to determine what page the user is on.',
-                'type'        => 'string',
-                'default'     => '{{ :page }}',
+                'type' => 'string',
+                'default' => '{{ :page }}',
             ],
             'productsPerPage' => [
-                'title'             => 'Product Per Page',
-                'type'              => 'string',
+                'title' => 'Product Per Page',
+                'type' => 'string',
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => 'Invalid format of the products per page value',
-                'default'           => '10',
+                'default' => '10',
             ],
             'noProductsMessage' => [
-                'title'        => 'No Products Message',
-                'description'  => 'No Product Messages',
-                'type'         => 'string',
-                'default'      => 'No product found',
+                'title' => 'No Products Message',
+                'description' => 'No Product Messages',
+                'type' => 'string',
+                'default' => 'No product found',
                 'showExternalParam' => false
             ],
             'productPage' => [
-                'title'       => 'Product Page',
+                'title' => 'Product Page',
                 'description' => 'Product Page',
-                'type'        => 'dropdown',
-                'default'     => 'shop/product',
-                'group'       => 'Links',
+                'type' => 'dropdown',
+                'default' => 'shop/product',
+                'group' => 'Links',
             ],
         ];
     }
 
-    public function addToCart() {
+    /*
+     * 
+     * 
+     */
+    public function onTest() {
         $id = post('id');
-        $qty =  post('qty');
+        $qty = post('qty');
 
         $product = Product::findorfail($id);
-
-        dd($product);
-        $data[$product->id] = [
-                            'id' => $product->id,
-                            'name' => $product->name,
-                            'price' => $product->price,
-                            'qty' => $qty,
-                        ];
+        $data = Session::get('items');
+        
+        if(isset($data[$product->id])) {
+            $data[$product->id]['qty'] += $qty;  
+        } else {
+            $data[$product->id] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'qty' => $qty,
+            ];
+        }
         Session::put('items', $data);
-
+        
+        $this->page['cartItems'] = count($data);
     }
-    public function onRun()
-    {
+
+   
+
+    public function onRun() {
         $data = Session::get('items');
 
-        $this->page['cartItems']  = count($data);
+        $this->page['cartItems'] = count($data);
         //dd($data);
         $this->prepareVars();
 
-        $this->products = $this->page['products'] = $this->listProducts();
+        $this->items = $this->page['items'] = $this->listProducts();
 
         /*
          * If the page number is not valid, redirect
@@ -101,45 +109,37 @@ class Products extends ComponentBase
         if ($pageNumberParam = $this->paramName('pageNumber')) {
             $currentPage = $this->property('pageNumber');
 
-            if ($currentPage > ($lastPage = $this->products->lastPage()) && $currentPage > 1)
+            if ($currentPage > ($lastPage = $this->items->lastPage()) && $currentPage > 1)
                 return Redirect::to($this->currentPageUrl([$pageNumberParam => $lastPage]));
         }
     }
-    
-    
-    
-    protected function prepareVars()
-    {
+
+    protected function prepareVars() {
         $this->pageParam = $this->page['pageParam'] = $this->paramName('pageNumber');
         $this->noProductsMessage = $this->page['noProductsMessage'] = $this->property('noProductsMessage');
 
         $this->productPage = $this->page['productPage'] = $this->property('productPage');
     }
-    
-    protected function listProducts()
-    {
+
+    protected function listProducts() {
 
         /*
          * List all the products, eager load their categories
          */
-        $products = Product::paginate(10);
+        $products = Product::paginate( $this->property('productsPerPage'));
 
         /*
          * Add a "url" helper attribute for linking to each product and category
          */
         $products->each(function($product) {
             $product->setUrl($this->productPage, $this->controller);
-
         });
 
         return $products;
     }
-    
-    
-     public function getProductPageOptions()
-    {
+
+    public function getProductPageOptions() {
         return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
-
 
 }
