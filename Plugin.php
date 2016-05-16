@@ -35,6 +35,7 @@ class Plugin extends PluginBase
 
         return [
             'Mage2\Cart\Components\Products' => 'products',
+            'Mage2\Cart\Components\CartPage' => 'cartPage',
         ];
     }
 
