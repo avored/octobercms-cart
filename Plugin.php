@@ -34,10 +34,11 @@ class Plugin extends PluginBase
         
 
         return [
-            'Mage2\Cart\Components\Products' => 'products',
-            'Mage2\Cart\Components\CartPage' => 'cartPage',
-            'Mage2\Cart\Components\ProductPage' => 'productPage',
-            'Mage2\Cart\Components\Mage2Cart' => 'mage2cart',
+            'Mage2\Cart\Components\Products'        => 'products',
+            'Mage2\Cart\Components\CartPage'        => 'cartPage',
+            'Mage2\Cart\Components\ProductPage'     => 'productPage',
+            'Mage2\Cart\Components\CheckoutPage'    => 'mage2CheckoutPage',
+            'Mage2\Cart\Components\Mage2Cart'       => 'mage2cart',
         ];
     }
 
