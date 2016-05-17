@@ -48,8 +48,6 @@ class Product extends Model
             'slug' => $this->slug,
         ];
 
-     
-
         return $this->url = $controller->pageUrl($pageName, $params);
     }
 }
