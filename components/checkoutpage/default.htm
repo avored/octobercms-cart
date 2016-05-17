@@ -2,7 +2,7 @@
     <p>
         &nbsp;
     </p>
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" data-request="{{ __SELF__ }}::onSubmitOrder">
         <div class="row marketing">
             <div class="col-lg-6">
 
@@ -11,7 +11,7 @@
                         <!-- Text input-->
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <input type="text" placeholder="Email Address" class="form-control">
+                                <input type="text" placeholder="Email Address" name="email_address" class="form-control">
                             </div>
                         </div>
                         <hr>
@@ -108,7 +108,7 @@
                                 <label for="cardNumber">Card Number</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX"
-                                           required autofocus />
+                                            autofocus />
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                 </div>
                             </div>
@@ -119,16 +119,16 @@
                                         <br />
 
                                         <div class="col-xs-6 col-lg-6 pl-ziro">
-                                            <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                            <input type="text" class="form-control" id="expityMonth" placeholder="MM"  />
                                         </div>
                                         <div class="col-xs-6 col-lg-6 pl-ziro">
-                                            <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
+                                            <input type="text" class="form-control" id="expityYear" placeholder="YY"  /></div>
                                     </div>
                                 </div>
                                 <div class="col-xs-5 col-md-5 pull-right">
                                     <div class="form-group">
                                         <label for="cvCode">CVV Code</label>
-                                        <input type="password" class="form-control" id="cvCode" placeholder="XXX" required />
+                                        <input type="password" class="form-control" id="cvCode" placeholder="XXX"  />
                                     </div>
                                 </div>
                             </div>
@@ -136,10 +136,10 @@
                     </div>
                 </div>
 
-                <a href="#" class="btn btn-warning btn-lg btn-block" role="button">
+                <button class="btn btn-warning btn-lg btn-block" type="submit">
                     <span class="glyphicon glyphicon-play"></span>
                     CONFIRM ORDER
-                </a>
+                </button>
 
             </div>
 

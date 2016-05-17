@@ -24,7 +24,7 @@ class Mage2Cart extends ComponentBase
      * 
      * 
      */
-    public function onTest() {
+    public function onAddToCart() {
         $id = post('id');
         $qty = post('qty');
 

@@ -17,5 +17,10 @@ class CheckoutPage extends ComponentBase
     {
         return [];
     }
+    
+    public function onSubmitOrder() {
+        $email = post('email_address');
+        dd($email);
+    }
 
 }
