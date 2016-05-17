@@ -66,31 +66,7 @@ class Products extends ComponentBase {
         ];
     }
 
-    /*
-     * 
-     * 
-     */
-    public function onTest() {
-        $id = post('id');
-        $qty = post('qty');
-
-        $product = Product::findorfail($id);
-        $data = Session::get('items');
-        
-        if(isset($data[$product->id])) {
-            $data[$product->id]['qty'] += $qty;  
-        } else {
-            $data[$product->id] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'qty' => $qty,
-            ];
-        }
-        Session::put('items', $data);
-        
-        $this->page['cartItems'] = count($data);
-    }
+   
 
    
 

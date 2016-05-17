@@ -1,3 +1,54 @@
-<p>{{ product.name }}</p>
+<p>&nbsp;</p>
+<div class="container">	
+    <div class="col-md-12">
+        <div class="product col-md-5 service-image-left">
 
-<small>You can delete this file if you want</small>
+            <center>
+                <img id="item-display" src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png"
+                     class="img-responsive"
+                     alt="" />
+            </center>
+
+
+            <div class="container service1-items col-sm-2 col-md-2 pull-left">
+                <center>
+                    <a id="item-1" class="service1-item">
+                        <img class="img-responsive" src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
+                    </a>
+                    <a id="item-2" class="service1-item">
+                        <img  class="img-responsive" src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
+                    </a>
+                    <a id="item-3" class="service1-item">
+                        <img class="img-responsive" src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
+                    </a>
+                </center>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <h2 class="product-title">{{ product.name }}</h2>
+            <div class="product-desc">{{ product.description | raw }}</div>
+            <div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
+            <hr>
+            <div class="product-price">$ {{ product.price}}</div>
+            <div class="product-stock">In Stock</div>
+            <hr>
+            <div class="btn-group cart">
+                <form data-request="mage2cart::onTest">
+                    <div class="input-group">
+                        <input type="hidden" name="id" value="{{ product.id }}">
+                        <input type="number" id="input-item" class="form-control" value="1" name="qty"/>
+                        <span class="input-group-btn">
+                            <!--<button type="submit" class="btn btn btn-primary">AddToCart</button>-->
+                            <button type="submit" class="btn btn-sm btn-primary btn-block">
+                                AddToCart
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div> 
+</div>
+
