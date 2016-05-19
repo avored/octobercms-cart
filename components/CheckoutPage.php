@@ -32,10 +32,14 @@ class CheckoutPage extends ComponentBase {
     public function onPlaceOrder() {
         $data = post();
         $data['password_confirmation'] = $data['password'] = str_random(8);
-        //if(Customer::find())
+        $customerModel = new Customer();
         
         try {
-            $customer = Customer::create($data);
+            if(null == $customerModel->findByEmail($data['email'])) {
+                $customer = $customerModel->create($data);
+            } else {
+                $customer  = $customerModel->findByEmail($data['email']);
+            }
             $address = Address::create($data);
 
             $data ['customer_id'] = $customer->id;

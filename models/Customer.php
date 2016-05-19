@@ -75,7 +75,18 @@ class Customer extends User {
     public function beforeCreate()
     {
         $this->persist_code = str_random();
+    }
+       /**
+     * Looks up a user by their email address.
+     * @return self
+     */
+    public static function findByEmail($email)
+    {
+        if (!$email) {
+            return;
+        }
 
+        return self::where('email', $email)->first();
     }
 
 }
