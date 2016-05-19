@@ -1,12 +1,13 @@
-<?php namespace Mage2\Cart\Models;
+<?php
+
+namespace Mage2\Cart\Models;
 
 use Model;
 
 /**
  * Product Model
  */
-class Product extends Model
-{
+class Product extends Model {
 
     /**
      * @var string The database table used by the model.
@@ -21,7 +22,7 @@ class Product extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['name','description','slug','price'];
+    protected $fillable = ['name', 'description', 'slug', 'price'];
 
     /**
      * @var array Relations
@@ -29,20 +30,21 @@ class Product extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [];
-    public $belongsToMany = [];
+    public $belongsToMany = [
+        'orders' => 'Mage2\Cart\Models\Order'
+    ];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
 
-      /**
+    /**
      * Sets the "url" attribute with a URL to this object
      * @param string $pageName
      * @param Cms\Classes\Controller $controller
      */
-    public function setUrl($pageName, $controller)
-    {
+    public function setUrl($pageName, $controller) {
         $params = [
             'id' => $this->id,
             'slug' => $this->slug,
@@ -50,4 +52,5 @@ class Product extends Model
 
         return $this->url = $controller->pageUrl($pageName, $params);
     }
+
 }

@@ -5,3 +5,4 @@
     - create_customers_table.php
     - create_addresses_table.php
     - create_orders_table.php
+    - create_order_product_table.php

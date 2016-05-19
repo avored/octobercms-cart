@@ -32,8 +32,8 @@ class CheckoutPage extends ComponentBase {
     public function onPlaceOrder() {
         $data = post();
         $data['password_confirmation'] = $data['password'] = str_random(8);
+        //if(Customer::find())
         
-
         try {
             $customer = Customer::create($data);
             $address = Address::create($data);
@@ -43,14 +43,21 @@ class CheckoutPage extends ComponentBase {
             $data ['address_billing_id'] = $address->id;
 
             $order = Order::create($data);
+            $data = Session::get('items');
+            foreach($data as $productId => $item) {
+                $order->products()->attach($productId);
+            }
+            Session::forget('items');
             /*
              * Redirect HERE to Property RedirectPage
              */
-        }  catch (Exception $ex) {
-            if (Request::ajax()) throw $ex;
-            else Flash::error($ex->getMessage());
+        } catch (Exception $ex) {
+            if (Request::ajax())
+                throw $ex;
+            else
+                Flash::error($ex->getMessage());
         }
-       
+
 
         //redirect to order_success Page
     }
