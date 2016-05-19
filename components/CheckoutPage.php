@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Session;
 use Cms\Classes\ComponentBase;
 use Mage2\Cart\Models\Customer;
 use Mage2\Cart\Models\Address;
+use Mage2\Cart\Models\Order;
+use Exception;
+use October\Rain\Support\Facades\Flash;
 
 class CheckoutPage extends ComponentBase {
 
@@ -29,6 +32,7 @@ class CheckoutPage extends ComponentBase {
         $data = post();
         $data['password'] = str_random(8);
 
+        try {
         $customer = Customer::create($data);
         $address = Address::create($data);
 
@@ -37,6 +41,14 @@ class CheckoutPage extends ComponentBase {
         $data ['address_billing_id'] = $address->id;
 
         $order = Order::create($data);
+        /*
+         * Redirect HERE to Property RedirectPage
+         */
+        }  catch (Exception $ex) {
+            if (Request::ajax()) throw $ex;
+            else Flash::error($ex->getMessage());
+        }
+       
 
         //redirect to order_success Page
     }
