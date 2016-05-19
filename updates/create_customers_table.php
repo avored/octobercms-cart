@@ -16,6 +16,7 @@ class CreateCustomersTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('password', 60);
+            $table->string('persist_code')->nullable();
             $table->string('phone');
             
             

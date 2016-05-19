@@ -8,6 +8,7 @@ use Mage2\Cart\Models\Customer;
 use Mage2\Cart\Models\Address;
 use Mage2\Cart\Models\Order;
 use Exception;
+use Illuminate\Support\Facades\Request;
 use October\Rain\Support\Facades\Flash;
 
 class CheckoutPage extends ComponentBase {
@@ -30,20 +31,21 @@ class CheckoutPage extends ComponentBase {
 
     public function onPlaceOrder() {
         $data = post();
-        $data['password'] = str_random(8);
+        $data['password_confirmation'] = $data['password'] = str_random(8);
+        
 
         try {
-        $customer = Customer::create($data);
-        $address = Address::create($data);
+            $customer = Customer::create($data);
+            $address = Address::create($data);
 
-        $data ['customer_id'] = $customer->id;
-        $data ['address_shipping_id'] = $address->id;
-        $data ['address_billing_id'] = $address->id;
+            $data ['customer_id'] = $customer->id;
+            $data ['address_shipping_id'] = $address->id;
+            $data ['address_billing_id'] = $address->id;
 
-        $order = Order::create($data);
-        /*
-         * Redirect HERE to Property RedirectPage
-         */
+            $order = Order::create($data);
+            /*
+             * Redirect HERE to Property RedirectPage
+             */
         }  catch (Exception $ex) {
             if (Request::ajax()) throw $ex;
             else Flash::error($ex->getMessage());
