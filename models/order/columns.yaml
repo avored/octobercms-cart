@@ -6,3 +6,23 @@ columns:
     id:
         label: ID
         searchable: true
+        
+    customer_id:
+        label: Ship To
+        searchable: false  
+        
+    payment_method:
+        label: Payment Method
+        searchable: false  
+        
+    shipping_method:
+        label: Shipping Method
+        searchable: false
+        
+    status_id:
+        label: Status
+        searchable: true    
+        
+    created_at:
+        label: Created Date
+        searchable: false    

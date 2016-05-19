@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->integer('address_billing_id');
             $table->string('payment_method');
             $table->string('shipping_method');
+            $table->integer('status_id');
             $table->timestamps();
         });
     }

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Order
+
+# Model Form Field configuration
+form: $/mage2/cart/models/order/fields.yaml
+
+# Model Class name
+modelClass: Mage2\Cart\Models\Order
+
+# Default redirect location
+defaultRedirect: mage2/cart/orders
+
+# Create page
+create:
+    title: Create Order
+    redirect: mage2/cart/orders/update/:id
+    redirectClose: mage2/cart/orders
+
+# Update page
+update:
+    title: Edit Order
+    redirect: mage2/cart/orders
+    redirectClose: mage2/cart/orders
+
+# Preview page
+preview:
+    title: Preview Order
