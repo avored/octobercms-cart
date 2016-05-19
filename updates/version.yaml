@@ -1,3 +1,7 @@
 1.0.0:
     - Initialize plugin.
     - create_products_table.php
+1.0.1:
+    - create_customers_table.php
+    - create_addresses_table.php
+    - create_orders_table.php

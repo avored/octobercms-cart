@@ -38,7 +38,7 @@ class Plugin extends PluginBase
             'Mage2\Cart\Components\CartPage'        => 'cartPage',
             'Mage2\Cart\Components\ProductPage'     => 'productPage',
             'Mage2\Cart\Components\CheckoutPage'    => 'mage2CheckoutPage',
-            'Mage2\Cart\Components\Mage2Cart'       => 'mage2cart',
+            'Mage2\Cart\Components\Cart'            => 'mage2cart',
         ];
     }
 
