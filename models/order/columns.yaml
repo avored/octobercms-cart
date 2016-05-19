@@ -8,8 +8,10 @@ columns:
         searchable: true
         
     customer_id:
-        label: Ship To
-        searchable: false  
+        label: Customer
+        relation: customer
+        select : first_name
+        searchable: false
         
     payment_method:
         label: Payment Method

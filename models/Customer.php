@@ -58,7 +58,9 @@ class Customer extends User {
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
+    public $hasMany = [
+        'orders' => ['Mage2\Cart\Models\Order']
+    ];
     public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];

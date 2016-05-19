@@ -32,9 +32,13 @@ class Order extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
+    public $hasOne = [
+        
+    ];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'customer' => ['Mage2\Cart\Models\Customer']
+    ];
     public $belongsToMany = ['products' => ['Mage2\Cart\Models\Product', 'table' => 'mage2_cart_order_product']];
      
     public $morphTo = [];
