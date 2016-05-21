@@ -12,7 +12,7 @@ modelClass: Mage2\Cart\Models\Order
 title: Manage Orders
 
 # Link URL for each record
-recordUrl: mage2/cart/orders/update/:id
+recordUrl: mage2/cart/orders/preview/:id
 
 # Message to display if the list is empty
 noRecordsMessage: No Order

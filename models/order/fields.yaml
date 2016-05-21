@@ -6,3 +6,20 @@ fields:
     id:
         label: ID
         disabled: true
+        
+    customer:
+        label : Customer
+        relation: customer
+        select: full_name
+
+    payment_method:
+        label : Payment Method    
+    
+    shipping_method:
+        label : Shipping Method
+        
+        
+    address_shipping_id :
+        label: Shipping Address:
+        type: partial
+        path: ~/plugins/mage2/cart/models/order/_ship_to.htm
