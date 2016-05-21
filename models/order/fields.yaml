@@ -19,7 +19,5 @@ fields:
         label : Shipping Method
         
         
-    address_shipping_id :
+    shipping_address :
         label: Shipping Address:
-        type: partial
-        path: ~/plugins/mage2/cart/models/order/_ship_to.htm

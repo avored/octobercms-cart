@@ -23,13 +23,36 @@ class Orders extends Controller {
         BackendMenu::setContext('Mage2.Cart', 'cart', 'orders');
     }
 
+    public function listOverrideColumnValue($model, $column, $definition) {
+        if($column == "shipping_address") {
+            $shipppingAddressModel = Address::find($model->address_shipping_id);
+
+            $addressLabel =  $shipppingAddressModel->address_1 .  " , " .
+                             $shipppingAddressModel->address_2 .  " , " .
+                             $shipppingAddressModel->city .  " " . $shipppingAddressModel->country;
+
+            return $addressLabel;
+        }
+
+        if($column == "billing_address") {
+            $shipppingAddressModel = Address::find($model->address_shipping_id);
+
+            $addressLabel =  $shipppingAddressModel->address_1 .  " , " .
+                $shipppingAddressModel->address_2 .  " , " .
+                $shipppingAddressModel->city .  " " . $shipppingAddressModel->country;
+
+            return $addressLabel;
+        }
+    }
+
     public function formExtendFieldsBefore($form) {
-        var_dump($form);die;
-        $model = $form->model;
-        $addressModel = Address::find($model->address_shipping_id);
-        
-        return $addressModel->address_1;
-        
+
+        $shipppingAddressModel = Address::find($form->model->address_shipping_id);
+
+        $form->model->shipping_address =    $shipppingAddressModel->address_1 .  " , " .
+                                                    $shipppingAddressModel->address_2 .  " , " .
+                                                    $shipppingAddressModel->city .  " " . $shipppingAddressModel->country;
+
     }
   
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Mage2\Cart\Updates;
 
 use Schema;
@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->float('price',11,6);
             $table->timestamps();
         });
-        
+
     }
 
     public function down()

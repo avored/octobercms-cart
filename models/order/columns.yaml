@@ -13,13 +13,12 @@ columns:
         select : first_name
         searchable: false
         
-    payment_method:
-        label: Payment Method
-        searchable: false  
-        
-    shipping_method:
-        label: Shipping Method
-        searchable: false
+    shipping_address:
+        label: Shipping Address
+
+    billing_address:
+            label: Billing Address
+
         
     status_id:
         label: Status
