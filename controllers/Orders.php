@@ -52,6 +52,10 @@ class Orders extends Controller {
         $form->model->shipping_address =    $shipppingAddressModel->address_1 .  " , " .
                                                     $shipppingAddressModel->address_2 .  " , " .
                                                     $shipppingAddressModel->city .  " " . $shipppingAddressModel->country;
+        
+        $form->model->billing_address =    $shipppingAddressModel->address_1 .  " , " .
+                                                    $shipppingAddressModel->address_2 .  " , " .
+                                                    $shipppingAddressModel->city .  " " . $shipppingAddressModel->country;
 
     }
   

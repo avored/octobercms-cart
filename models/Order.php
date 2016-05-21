@@ -27,17 +27,18 @@ class Order extends Model
                     'address_billing_id',
                     'payment_method',
                     'shipping_method',
+                    'status_id'
     ];
 
     /**
      * @var array Relations
      */
     public $hasOne = [
-        
     ];
     public $hasMany = [];
     public $belongsTo = [
-        'customer' => ['Mage2\Cart\Models\Customer']
+        'customer' => \Mage2\Cart\Models\Customer::class,
+        'status' => \Mage2\Cart\Models\Status::class
     ];
     public $belongsToMany = ['products' => ['Mage2\Cart\Models\Product', 'table' => 'mage2_cart_order_product']];
      

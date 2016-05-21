@@ -7,7 +7,9 @@ use Cms\Classes\ComponentBase;
 use Mage2\Cart\Models\Customer;
 use Mage2\Cart\Models\Address;
 use Mage2\Cart\Models\Order;
+use Mage2\Cart\Models\Status;
 use Exception;
+use Cms\Classes\Page;
 use Illuminate\Support\Facades\Request;
 use October\Rain\Support\Facades\Flash;
 
@@ -21,7 +23,17 @@ class CheckoutPage extends ComponentBase {
     }
 
     public function defineProperties() {
-        return [];
+        return [
+             'successPage' => [
+                'title' => 'Success Page',
+                'description' => 'Successfull Order Page',
+                'type' => 'dropdown',
+            ]
+        ];
+    }
+    
+    public function getSuccessPageOptions() {
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     /*
@@ -46,6 +58,7 @@ class CheckoutPage extends ComponentBase {
             $data ['address_shipping_id'] = $address->id;
             $data ['address_billing_id'] = $address->id;
 
+            $data ['status_id'] = Status::where('identifier', '=', 'pending' )->get()->first()->id;
             $order = Order::create($data);
             $data = Session::get('items');
             foreach($data as $productId => $item) {
@@ -69,6 +82,7 @@ class CheckoutPage extends ComponentBase {
     public function onRun() {
         $data = Session::get('items');
         $this->page['items'] = $data;
+        $this->page['successPage'] = $this->property('successPage');
     }
 
 }

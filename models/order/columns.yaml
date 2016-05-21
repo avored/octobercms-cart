@@ -4,7 +4,7 @@
 
 columns:
     id:
-        label: ID
+        label: ORDER ID
         searchable: true
         
     customer_id:
@@ -22,7 +22,8 @@ columns:
         
     status_id:
         label: Status
-        searchable: true    
+        relation: status
+        select: name
         
     created_at:
         label: Created Date

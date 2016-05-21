@@ -4,7 +4,7 @@
 
 fields:
     id:
-        label: ID
+        label: Order ID
         disabled: true
         
     customer:
@@ -13,11 +13,13 @@ fields:
         select: full_name
 
     payment_method:
-        label : Payment Method    
+        label : Payment Method 
     
     shipping_method:
         label : Shipping Method
         
+    shipping_address:
+        label: Shipping Address
         
-    shipping_address :
-        label: Shipping Address:
+    billing_address:
+        label: Billing Address
