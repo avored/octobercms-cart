@@ -89,5 +89,20 @@ class Plugin extends PluginBase {
             ]
         ];
     }
+    
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label'       => 'Cart Settings',
+                'description' => 'Mage2 Cart Settings',
+                'category'    => 'Cart',
+                'icon'        => 'icon-cog',
+                'class'       => 'Mage2\Cart\Models\Settings',
+                'order'       => 500,
+                'permissions' => ['mage2.cart.*']
+            ]
+        ];
+    }
 
 }

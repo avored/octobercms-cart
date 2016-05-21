@@ -1,0 +1,16 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+tabs:
+    fields:
+
+        # Require Activation
+        free_shipping_method:
+            span: left
+            label: Free Shipping
+            comment: Free Shipping Method
+            type: switch
+            tab: Shipping Method
+
+      
